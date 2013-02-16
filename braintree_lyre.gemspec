@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.version       = BraintreeLyre::VERSION
   gem.authors       = ["Eric Marthinsen"]
   gem.email         = ["emarthinsen@agilecommerce.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{A Lyre for Braintree's payment gateway}
+  gem.summary       = %q{A Lyre for Braintree's payment gateway}
+  gem.homepage      = "https://github.com/Sortfolio/braintree_lyre"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
