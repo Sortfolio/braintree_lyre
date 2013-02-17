@@ -1,5 +1,2 @@
-require "braintree_lyre/version"
-
-module BraintreeLyre
-  # Your code goes here...
-end
+require 'braintree_lyre/version'
+require 'braintree_lyre/lyre'
