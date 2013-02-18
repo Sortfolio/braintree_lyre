@@ -35,15 +35,5 @@ module BraintreeLyre
       "REDIRECT CONFIRM"
     end
 
-    post '/*' do
-      debugger
-      "DEFAULT POST"
-    end
-
-    get '/*' do
-      debugger
-      "DEFAULT GET"
-    end
-
   end
 end
