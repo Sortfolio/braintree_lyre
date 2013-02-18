@@ -17,5 +17,27 @@ module BraintreeLyre
       ENV['GATEWAY_PORT'] = lyre.port.to_s
     end
 
+    # Braintree::TransparentRedirect.url
+    post "/merchants/:merchant_id/transparent_redirect_requests" do
+      debugger
+      "REDIRECT REQUEST"
+    end
+
+    # Braintree::TransparentRedirect.confirm
+    post "/merchants/:merchant_id/transparent_redirect_requests/:id/confirm" do
+      debugger
+      "REDIRECT CONFIRM"
+    end
+
+    post '/*' do
+      debugger
+      "DEFAULT POST"
+    end
+
+    get '/*' do
+      debugger
+      "DEFAULT GET"
+    end
+
   end
 end

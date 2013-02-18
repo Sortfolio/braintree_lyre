@@ -4,11 +4,11 @@ require 'braintree'
 describe "Setup" do
   
   before(:each) do
-    @lyre = BraintreeLyre::Lyre.create.start
+    @lyre = BraintreeLyre::Lyre.boot
   end
 
   after(:each) do
-    @lyre.stop
+    @lyre.shutdown
   end
 
   it "should override the Braintree configuration when the lyre is started" do
