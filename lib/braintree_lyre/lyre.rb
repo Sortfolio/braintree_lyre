@@ -9,6 +9,8 @@ module BraintreeLyre
     PUBLIC_KEY = "pubkey"
     PRIVATE_KEY = "prikey"
 
+    attr_accessor :last_thing
+
     setup do |lyre|
       Braintree::Configuration.environment = BraintreeLyre::Lyre::ENVIRONMENT
       Braintree::Configuration.merchant_id = BraintreeLyre::Lyre::MERCHANT_ID
@@ -19,8 +21,12 @@ module BraintreeLyre
 
     # Braintree::TransparentRedirect.url
     post "/merchants/:merchant_id/transparent_redirect_requests" do
-      debugger
-      "REDIRECT REQUEST"
+      if params[:tr_data]
+        transaction = TransparentRedirect.create(params)
+        redirect to(transaction.return_url), 303
+      else
+        [422, { "Content-Type" => "text/html" }, ["Invalid submission"]]
+      end
     end
 
     # Braintree::TransparentRedirect.confirm

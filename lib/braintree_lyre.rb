@@ -1,2 +1,5 @@
 require 'braintree_lyre/version'
+require 'braintree_lyre/helpers'
 require 'braintree_lyre/lyre'
+require 'braintree_lyre/transparent_redirect'
+require 'braintree_lyre/transparent_redirect/create_transaction'
