@@ -4,7 +4,7 @@ module BraintreeLyre::TransparentRedirect
 
   class CreateTransaction
 
-    attr_reader :merchant_id, :redirect_url
+    attr_reader :merchant_id, :redirect_url, :kind
 
     def initialize(params)
       _, query = *params['tr_data'].split("|", 2)
@@ -12,19 +12,21 @@ module BraintreeLyre::TransparentRedirect
 
       @merchant_id = params['merchant_id']
       @redirect_url = tr_data['redirect_url']
+      @kind = tr_data['kind']
     end
 
     def return_url
-      id = create_id(merchant_id)
-      query = base_query(id)
-      URI.parse(redirect_url).merge("?#{query}&hash=#{hash(query)}")
+      query = base_query
+      uri = URI.parse(redirect_url).merge("?#{query}&hash=#{hash(query)}")
+      uri.to_s
     end
 
     private
 
     #MOVE TO HELPER?
-    def base_query(id)
-      "http_status=200&id=#{id}"
+    def base_query
+      id = create_id(merchant_id)
+      "http_status=200&id=#{id}&kind=#{kind}"
     end
 
     #MOVE TO HELPER?

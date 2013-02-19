@@ -4,6 +4,8 @@ require 'lyre'
 module BraintreeLyre
   class Lyre < Lyre::App
 
+    include BraintreeLyre::Helpers
+
     ENVIRONMENT = :development
     MERCHANT_ID = "0000"
     PUBLIC_KEY = "pubkey"
@@ -31,8 +33,12 @@ module BraintreeLyre
 
     # Braintree::TransparentRedirect.confirm
     post "/merchants/:merchant_id/transparent_redirect_requests/:id/confirm" do
-      debugger
-      "REDIRECT CONFIRM"
+      hash = {
+        id:          params[:id],
+        merchant_id: params[:merchant_id]
+      }
+
+      gzipped_response(201, hash.to_xml(:root => 'customer'))
     end
 
   end

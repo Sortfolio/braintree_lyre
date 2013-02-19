@@ -1,7 +1,24 @@
+require 'zlib'
 module BraintreeLyre
 
   module Helpers
     
+    def gzip(content)
+      StringIO.new.tap do |io|
+        gz = Zlib::GzipWriter.new(io)
+      
+        begin
+          gz.write(content)
+        ensure
+          gz.close
+        end
+      end.string
+    end
+
+    def gzipped_response(status_code, uncompressed_content)
+      [status_code, { "Content-Encoding" => "gzip" }, gzip(uncompressed_content)]
+    end
+
     def camelize(str)
       segments = str.split('_')
 
